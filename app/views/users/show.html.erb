@@ -1,3 +1,4 @@
 <p>hello <%= @user.name %></p>
 
 <p><%= link_to "Edit Profile", edit_user_path(@user) %></p>
+<p><%= link_to "Destroy Account", user_path(@user), method: :delete, confirm: "Are you sure?"%></p>
