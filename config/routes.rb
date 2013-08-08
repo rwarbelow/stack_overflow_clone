@@ -1,4 +1,7 @@
 StackOverflowClone::Application.routes.draw do
+
+  resources :questions
+
   root to: 'pages#index'
   resources :users
   get '/login', to: 'sessions#new'
