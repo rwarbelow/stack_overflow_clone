@@ -1,10 +1,7 @@
 <h3>Question:</h3><%= @question.text %>
 
-<h3>Asked by: </h3>
-
-<%= @question.user.name %>
-<%= link_to "Edit", edit_question_path  %>
-
+Asked by: <%= @question.user.name %>
+<%= link_to "Edit", edit_question_path %>
 <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%>
 
 <h3>Answers:</h3>
