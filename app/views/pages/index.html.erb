@@ -1,3 +1,5 @@
 <% @questions.each do |question| %>
-  <p><%= question.text %>by <%= question.user.name %><br></p>
+  <p><%= question.text %>by <%= question.user.name %>
+    <%= link_to "Answer this question", new_question_answer_path(question) %>
+    <br></p>
 <% end %>
