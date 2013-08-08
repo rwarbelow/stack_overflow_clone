@@ -1,5 +1,7 @@
 <%= form_for(@question) do |f| %>
   <%= f.label :text %>
   <%= f.text_area :text %>
+  <%= f.label :all_tags %>
+  <%= f.text_field :all_tags %>
   <%= f.submit %>
 <% end %>
