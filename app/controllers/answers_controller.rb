@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
                                     question_id: params[:question_id])
     if @answer.valid?
       @answer.save
-      redirect_to question_path
+      redirect_to questions_path(params[:question_id])
     else
       @errors = @answer.errors.full_messages
       render 'new'

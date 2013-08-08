@@ -1,5 +1,9 @@
 <% if @questions %>
   <% @questions.each do |question| %>
-    <%= question.text %>
+    <h3><%= question.text %><br></h3>
+    <% question.answers.each do |answer| %>
+    <%= answer.text %>
+    <%= answer.user.name %><br>
+    <% end %>
   <% end %>
 <% end %>
