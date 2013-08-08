@@ -1,3 +1,5 @@
+<h1>Questions <%= @user.name %> has asked</h1>
+
 <% @questions.each do |question| %>
-  <p><%= question.text %> by <%= question.user.name %><br></p>
+  <p><%= question.text %><br></p>
 <% end %>

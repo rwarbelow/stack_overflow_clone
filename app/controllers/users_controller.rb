@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    # answers.users_answers(params[:])
   end
 
   def edit

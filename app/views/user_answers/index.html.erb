@@ -1,0 +1,8 @@
+<h1>Questions <%= @user.name %> has answered</h1>
+
+<% @answers.each do |answer| %>
+<p>Question: <%= answer.question.text %></p>
+<p>Asked by <%= answer.question.user.name %></p>
+<p><%= @user.name %>'s Answer: <%= answer.text %></p>
+<br>
+<% end %>

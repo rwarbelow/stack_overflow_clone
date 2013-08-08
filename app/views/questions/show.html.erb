@@ -1,8 +1,10 @@
 <h3>Question:</h3><%= @question.text %>
 
 Asked by: <%= @question.user.name %>
-<%= link_to "Edit", edit_question_path %>
-<%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%>
+<% if current_user && current_user.id == @question.user.id %>
+  <%= link_to "Edit", edit_question_path %>
+  <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%>
+<% end %>
 
 <h3>Answers:</h3>
 <% @question.answers.each do |answer| %>
