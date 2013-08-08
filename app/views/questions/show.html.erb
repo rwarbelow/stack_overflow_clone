@@ -8,6 +8,10 @@ Asked by: <%= @question.user.name %>
 <% @question.answers.each do |answer| %>
 <%= answer.text %>
 Answered by: <%= answer.user.name %><br>
+<% if answer.user == current_user %>
+<%= link_to "Edit", edit_question_answer_path(answer) %>
+<%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%><br><br>
+<% end %>
 <% end %>
 
 

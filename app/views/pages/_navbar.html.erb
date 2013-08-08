@@ -1,7 +1,7 @@
 <p>
   <% if current_user %>
     <%= link_to "Sign Out", logout_path, method: :delete %>
-    <%= link_to "User Dashboard", user_path %>
+    <%= link_to "User Dashboard", user_path(current_user) %>
   <% else %>
     <%= link_to 'Sign Up', new_user_path %>
     <%= link_to "Sign In", login_path  %>
