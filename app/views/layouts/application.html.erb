@@ -1,16 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StackOverflowClone</title>
+  <title>SO Cloned</title>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/pure-min.css">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+<script src="http://use.typekit.net/ajf8ggy.js"></script>
+<script>
+    try { Typekit.load(); } catch (e) {}
+</script>
+
 </head>
 <body>
-<%= render 'pages/navbar' %>
-<%= flash[:notice] %>
-<%= yield %>
+<div class="pure-g-r" id="layout">
+    <div class="sidebar pure-u">
+        <header class="header">
+            <hgroup>
+                <h1 class="brand-title">SO Cloned</h1>
+                <h2 class="brand-tagline">Pure CRUD on Rails</h2>
+            </hgroup>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <%= render 'pages/navbar' %>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <div class="pure-u-1">
+        <div class="content">
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+                <h1 class="content-subhead">Top Post</h1>
+
+                <!-- A single blog post -->
+                <section class="post">
+                    <header class="post-header">
+                        <%= image_tag("disa-johnson.jpg", alt: "Disa Johnson", height: "48", width: "48", class: "post-avatar") %>
+
+                        <h2 class="post-title">Introducing Stack Overflow (SO) Cloned</h2>
+
+                        <p class="post-meta">
+                            By <a href="/" class="post-author">Disa Johnson</a> under <a class="post-category post-category-design" href="/">Ruby</a> <a class="post-category post-category-pure" href="/">Rails</a>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+
+                            <%= flash[:notice] %>
+                            <%= yield %>
+                            Hello World!
+
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <footer class="footer">
+                <div class="pure-menu pure-menu-horizontal pure-menu-open">
+                    <ul>
+                        <li><a href="/">About</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+<script>
+YUI().use('node-base', 'node-event-delegate', function (Y) {
+    // This just makes sure that the href="#" attached to the <a> elements
+    // don't scroll you back up the page.
+    Y.one('body').delegate('click', function (e) {
+        e.preventDefault();
+    }, 'a[href="#"]');
+});
+</script>
 
 </body>
 </html>
