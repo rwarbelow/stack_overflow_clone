@@ -9,10 +9,10 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(params[:question])
-    # user = User.
+    user = User.find(session[:id])
     if @question.valid?
-      # user.questions << @question
       @question.save
+      user.questions << @question
       redirect_to questions_path
     else
       render 'new'
