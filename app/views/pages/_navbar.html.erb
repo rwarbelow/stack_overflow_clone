@@ -2,7 +2,7 @@
   <%= link_to "StackOverflow", root_path %>
   <% if current_user %>
     <%= link_to "Sign Out", logout_path, method: :delete %>
-    <%= link_to "User Dashboard", user_path(current_user) %>
+    <%= link_to "#{current_user.name}'s Dashboard", user_path(current_user) %>
     <%= link_to "Post a Question", new_question_path %>
 
   <% else %>

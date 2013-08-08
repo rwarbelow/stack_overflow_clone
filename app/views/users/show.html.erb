@@ -1,7 +1,8 @@
-<p> <%= @user.name %>'s Profile</p>
+<p><%= @user.name %>'s Profile</p>
 <p><%= link_to "See Questions #{@user.name} has asked", user_questions_path(@user) %></p>
 <p><%= link_to "See Questions #{@user.name} has answered", user_answers_path(@user) %></p>
+
 <% if current_user && current_user.id == @user.id %>
-<p><%= link_to "Edit Profile", edit_user_path(@user) %></p>
-<p><%= link_to "Destroy Account", user_path(@user), method: :delete, confirm: "Are you sure?"%></p>
+  <p><%= link_to "Edit Profile", edit_user_path(@user) %></p>
+  <p><%= link_to "Destroy Account", user_path(@user), method: :delete, confirm: "Are you sure?"%></p>
 <% end %>

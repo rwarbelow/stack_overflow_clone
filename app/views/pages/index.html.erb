@@ -1,13 +1,7 @@
 <% if @questions %>
   <% @questions.each do |question| %>
-    <p><%= link_to question.text, question_path(question) %><br>by <%= link_to question.user.name, user_path(question.user) %>
-      <% if current_user %>
-      <%= link_to "Answer this question", new_question_answer_path(question) %>
-      <% end %>
-      <br></p>
+    <h3><%= link_to question.title, question_path(question) %>
+        by <%= link_to question.user.name, user_path(question.user) %></h3>
+    <hr>
   <% end %>
-<% end %>
-
-<% if current_user %>
-  <p><%= link_to "Post a Question", new_question_path %></p>
 <% end %>

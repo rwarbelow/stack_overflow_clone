@@ -1,8 +1,11 @@
 <h1>Questions <%= @user.name %> has answered</h1>
-
-<% @answers.each do |answer| %>
-<p>Question: <%= answer.question.text %></p>
-<p>Asked by <%= answer.question.user.name %></p>
-<p><%= @user.name %>'s Answer: <%= answer.text %></p>
-<br>
+<% if @answers %>
+  <% @answers.each do |answer| %>
+    <% if answer.question %>
+      <%= link_to answer.question.title, question_path(answer.question) %>
+      <p>Asked by <%= answer.question.user.name %></p>
+    <% end %>
+  <% end %>
+<% else %>
+  <h1>!!!!!THIS USER HAS NO ANSWERS!!!!!</h1>
 <% end %>

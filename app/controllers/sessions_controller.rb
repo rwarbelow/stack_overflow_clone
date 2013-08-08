@@ -8,11 +8,10 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:user][:password])
       session[:id] = user.id
       flash[:notice] = "Successful Login"
-      redirect_to user_path(user)
     else
       flash[:notice] = "Invalid Login Info"
-      redirect_to root_path
     end
+      redirect_to root_path
   end
 
   def destroy
