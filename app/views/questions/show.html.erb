@@ -1,43 +1,26 @@
 <h3>Question: <%= @question.title %></h3>
-
+<%= render "shared/edit_and_delete" %>
+<p><%= @question.text %></p>
+Asked by: <%= @question.user.name %><br>
 <p>Tags: <% @question.tags.each do |tag| %>
     <%= tag.name %>
     <% end %> </p>
+<%= render "shared/vote_for" %>
 
-<%= @question.votes.sum(:count) %>
-
-<%= form_for(@vote) do |v| %>
-  <%= v.hidden_field(:voteable_type, value: 'Question') %>
-  <%= v.hidden_field(:count,         value: 1) %>
-  <%= v.hidden_field(:voteable_id,   value: @question.id) %>
-  <%= v.submit 'Vote up' %>
-<% end %>
-
-<%= form_for(@vote) do |v| %>
-  <%= v.hidden_field(:voteable_type, value: 'Question') %>
-  <%= v.hidden_field(:count,         value: -1) %>
-  <%= v.hidden_field(:voteable_id, value: @question.id) %>
-  <%= v.submit 'Vote down' %>
-<% end %>
-
-<p><%= @question.text %></p>
-Asked by: <%= @question.user.name %><br>
-<% if current_user && current_user.id == @question.user.id %>
-  <%= link_to "Edit", edit_question_path %>
-  <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%>
-<% end %><br>
 <h3>Question Comments:</h3>
     <% @question.comments.each do |comment| %>
       <%= comment.text %>
       By: <%= comment.user.name %><br>
       <% end %>
+      <br>
 <%= form_for(Comment.new) do |f| %>
       <%= f.hidden_field :commentable_id, :value => @question.id %>
       <%= f.hidden_field :commentable_type, :value => "Question" %>
-      <%= f.label :text %><br>
+      <%= f.label :text, "Post your comments" %><br>
       <%= f.text_area :text, :cols => "60", :rows => "2" %><br>
       <%= f.submit %>
     <% end %><br>
+<hr>
 
 <% if @question.answers.empty? %>
   <h3>This question has not yet been answered.</h3>
@@ -46,6 +29,14 @@ Asked by: <%= @question.user.name %><br>
   <% @question.answers.each do |answer| %>
     <%= answer.text %><br>
     Answered by: <%= link_to answer.user.name, user_path(answer.user) %><br>
+    <% if @question.user == current_user %>
+    <%= form_for(@question) do |f| %>
+      <%= f.hidden_field :best_answer_id, :value => answer.id %>
+      <%= f.submit "Mark as best answer" %>
+      <% end %>
+    <% end %>
+
+
     <h3>Answer Comments:</h3>
     <% answer.comments.each do |comment| %>
       <%= comment.text %>
@@ -61,11 +52,9 @@ Asked by: <%= @question.user.name %><br>
       <%= f.label :text %><br>
       <%= f.text_area :text, :cols => "60", :rows => "2" %><br>
       <%= f.submit %>
+      <hr>
     <% end %>
   <% end %>
 <% end %>
 <br>
-
-<% if current_user %>
-  <%= link_to "Answer question", new_question_answer_path(@question) %>
-<% end %>
+<%= render "answers/new" %>
