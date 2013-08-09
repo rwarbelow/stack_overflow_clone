@@ -1,0 +1,11 @@
+<h1>Questions <%= @user.name %> has answered</h1>
+<% if @answers %>
+  <hr>
+  <% @answers.each do |answer| %>
+    Question: <%= link_to answer.question.title, question_path(answer.question) %>
+    <p>Asked by <%= answer.question.user.name %></p>
+    <hr>
+  <% end %>
+<% else %>
+  <h1>Currently No Answers.</h1>
+<% end %>

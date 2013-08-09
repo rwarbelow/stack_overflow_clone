@@ -1,4 +1,10 @@
-<p>hello <%= @user.name %></p>
+<h1><%= @user.name %>'s Profile</h1>
+<% if current_user && current_user.id == @user.id %>
+  <hr>
+  <p><%= link_to "Edit Profile", edit_user_path(@user) %> |
+   <%= link_to "Destroy Account", user_path(@user), method: :delete, confirm: "Are you sure?"%></p>
+  <hr>
+<% end %>
+<p><%= link_to "Asked Questions by #{@user.name}", user_questions_path(@user) %></p>
+<p><%= link_to "Answered Questions by #{@user.name}", user_answers_path(@user) %></p>
 
-<p><%= link_to "Edit Profile", edit_user_path(@user) %></p>
-<p><%= link_to "Destroy Account", user_path(@user), method: :delete, confirm: "Are you sure?"%></p>
