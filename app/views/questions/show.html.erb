@@ -4,18 +4,26 @@
     <%= tag.name %>
     <% end %> </p>
 
-<%= @question.votes.sum(:count) %>
+<%= @question.votes.sum(:direction) %>
 
 <%= form_for(@vote) do |v| %>
   <%= v.hidden_field(:voteable_type, value: 'Question') %>
-  <%= v.hidden_field(:count,         value: 1) %>
+  <%= v.hidden_field(:direction,         value: 1) %>
   <%= v.hidden_field(:voteable_id,   value: @question.id) %>
   <%= v.submit 'Vote up' %>
 <% end %>
 
 <%= form_for(@vote) do |v| %>
   <%= v.hidden_field(:voteable_type, value: 'Question') %>
-  <%= v.hidden_field(:count,         value: -1) %>
+  <%= v.hidden_field(:direction,         value: 0) %>
+  <%= v.hidden_field(:voteable_id,   value: @question.id) %>
+  <%= v.submit 'Cancel Vote' %>
+<% end %>
+
+
+<%= form_for(@vote) do |v| %>
+  <%= v.hidden_field(:voteable_type, value: 'Question') %>
+  <%= v.hidden_field(:direction,         value: -1) %>
   <%= v.hidden_field(:voteable_id, value: @question.id) %>
   <%= v.submit 'Vote down' %>
 <% end %>
@@ -45,6 +53,31 @@ Asked by: <%= @question.user.name %><br>
   <h3>Answers:</h3>
   <% @question.answers.each do |answer| %>
     <%= answer.text %><br>
+
+    <%= answer.votes.sum(:direction) %>
+
+    <%= form_for(@vote) do |v| %>
+      <%= v.hidden_field(:voteable_type, value: 'Answer') %>
+      <%= v.hidden_field(:direction,         value: 1) %>
+      <%= v.hidden_field(:voteable_id,   value: answer.id) %>
+      <%= v.submit 'Vote up' %>
+    <% end %>
+
+    <%= form_for(@vote) do |v| %>
+      <%= v.hidden_field(:voteable_type, value: 'Answer') %>
+      <%= v.hidden_field(:direction,         value: 0) %>
+      <%= v.hidden_field(:voteable_id,   value: answer.id) %>
+      <%= v.submit 'Cancel Vote' %>
+    <% end %>
+
+
+    <%= form_for(@vote) do |v| %>
+      <%= v.hidden_field(:voteable_type, value: 'Answer') %>
+      <%= v.hidden_field(:direction,         value: -1) %>
+      <%= v.hidden_field(:voteable_id, value: answer.id) %>
+      <%= v.submit 'Vote down' %>
+    <% end %>
+
     Answered by: <%= link_to answer.user.name, user_path(answer.user) %><br>
     <h3>Answer Comments:</h3>
     <% answer.comments.each do |comment| %>
