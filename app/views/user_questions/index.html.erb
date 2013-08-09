@@ -1,0 +1,6 @@
+<h1>Questions <%= @user.name %> has asked</h1>
+
+<% @questions.each do |question| %>
+  <p><%= link_to question.title, question_path(question) %></p>
+  <p><%= question.text %></p><br>
+<% end %>

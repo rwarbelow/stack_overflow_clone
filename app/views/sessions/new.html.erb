@@ -1,0 +1,12 @@
+<p>Login</p>
+<%= form_for :user, url: login_path, method: :post do |u| %>
+  <p>
+    <%= u.label :email %><br>
+    <%= u.text_field :email %>
+  </p>
+  <p>
+    <%= u.label :password %><br>
+    <%= u.password_field :password %>
+  </p>
+  <p><%= u.submit %></p>
+<% end %>

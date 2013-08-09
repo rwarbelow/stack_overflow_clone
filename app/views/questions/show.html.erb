@@ -1,0 +1,28 @@
+<h3>Question: <%= @question.title %></h3>
+<p><%= @question.text %></p>
+
+Asked by: <%= @question.user.name %>
+<% if current_user && current_user.id == @question.user.id %>
+  <%= link_to "Edit", edit_question_path %>
+  <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%>
+<% end %>
+
+
+<% if @question.answers.empty? %>
+  <h3>This question has not yet been answered.</h3>
+<% else %>
+  <h3>Answers:</h3>
+  <% @question.answers.each do |answer| %>
+  <%= answer.text %><br>
+  Answered by: <%= link_to answer.user.name, user_path(answer.user) %><br>
+  <% if answer.user == current_user %>
+  <%= link_to "Edit", edit_question_answer_path(answer) %>
+  <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%><br><br>
+  <% end %>
+  <% end %>
+<% end %>
+<br>
+
+<% if current_user %>
+  <%= link_to "Answer question", new_question_answer_path(@question) %>
+<% end %>

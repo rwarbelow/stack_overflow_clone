@@ -1,5 +1,5 @@
 <% if @questions %>
   <% @questions.each do |question| %>
-    <%= question.text %>
+    <%= link_to question.title, question_path(question.id) %><br></h3>
   <% end %>
 <% end %>

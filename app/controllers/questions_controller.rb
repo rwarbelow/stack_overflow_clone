@@ -9,16 +9,34 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(params[:question])
-    # user = User.
+    user = User.find(session[:id])
     if @question.valid?
-      # user.questions << @question
       @question.save
+      user.questions << @question
       redirect_to questions_path
     else
       render 'new'
     end
   end
 
+  def show
+    @question = Question.find(params[:id])
+    @answers = @question.answers
+  end
 
+  def edit
+    @question = Question.find(params[:id])
+  end
 
+  def update
+    @question = Question.find(params[:id])
+    @question.update_attributes(params[:question])
+    redirect_to question_path
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to root_path
+  end
 end
