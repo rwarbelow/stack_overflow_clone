@@ -1,11 +1,23 @@
 <h3>Question: <%= @question.title %></h3>
 <p><%= @question.text %></p>
-
-Asked by: <%= @question.user.name %>
+Asked by: <%= @question.user.name %><br>
 <% if current_user && current_user.id == @question.user.id %>
   <%= link_to "Edit", edit_question_path %>
   <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%>
-<% end %>
+<% end %><br>
+<h3>Question Comments:</h3>
+    <% @question.comments.each do |comment| %>
+      <%= comment.text %>
+      By: <%= comment.user.name %><br>
+      <% end %>
+<%= form_for(Comment.new) do |f| %>
+      <%= f.hidden_field :commentable_id, :value => @question.id %>
+      <%= f.hidden_field :commentable_type, :value => "Question" %>
+      <%= f.label :text %><br>
+      <%= f.text_area :text, :cols => "60", :rows => "2" %><br>
+      <%= f.submit %>
+    <% end %><br>
+
 
 
 <% if @question.answers.empty? %>
@@ -13,12 +25,24 @@ Asked by: <%= @question.user.name %>
 <% else %>
   <h3>Answers:</h3>
   <% @question.answers.each do |answer| %>
-  <%= answer.text %><br>
-  Answered by: <%= link_to answer.user.name, user_path(answer.user) %><br>
-  <% if answer.user == current_user %>
-  <%= link_to "Edit", edit_question_answer_path(answer) %>
-  <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%><br><br>
-  <% end %>
+    <%= answer.text %><br>
+    Answered by: <%= link_to answer.user.name, user_path(answer.user) %><br>
+    <h3>Answer Comments:</h3>
+    <% answer.comments.each do |comment| %>
+      <%= comment.text %>
+      By: <%= comment.user.name %><br>
+      <% end %>
+    <% if answer.user == current_user %>
+      <%= link_to "Edit", edit_question_answer_path(answer) %>
+      <%= link_to "Delete", question_path, method: :delete, confirm: "Are you sure?"%><br>
+    <% end %><br>
+    <%= form_for(Comment.new) do |f| %>
+      <%= f.hidden_field :commentable_id, :value => answer.id %>
+      <%= f.hidden_field :commentable_type, :value => "Answer" %>
+      <%= f.label :text %><br>
+      <%= f.text_area :text, :cols => "60", :rows => "2" %><br>
+      <%= f.submit %>
+    <% end %>
   <% end %>
 <% end %>
 <br>
