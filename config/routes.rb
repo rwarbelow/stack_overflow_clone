@@ -4,6 +4,8 @@ StackOverflowClone::Application.routes.draw do
     resources :answers
   end
 
+  resources :comments
+
   resources :users
   get '/login', to: 'sessions#new'
 
