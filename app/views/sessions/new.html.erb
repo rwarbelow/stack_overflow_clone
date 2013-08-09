@@ -1,4 +1,5 @@
 <p>Login</p>
+<%= flash[:notice] %>
 <%= form_for :user, url: login_path, method: :post do |u| %>
   <p>
     <%= u.label :email %><br>
@@ -8,5 +9,5 @@
     <%= u.label :password %><br>
     <%= u.password_field :password %>
   </p>
-  <p><%= u.submit %></p>
+  <p><%= u.submit "Sign In" %></p>
 <% end %>
