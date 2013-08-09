@@ -4,7 +4,7 @@
     <%= tag.name %>
     <% end %> </p>
 
-<%= @question.votes.count %>
+<%= @question.votes.sum(:count) %>
 
 <%= form_for(@vote) do |v| %>
   <%= v.hidden_field(:voteable_type, value: 'Question') %>
