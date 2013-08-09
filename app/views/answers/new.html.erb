@@ -1,5 +1,6 @@
+<h1><%= @question.title %></h1>
 <%= form_for [@question,@answer] do |f| %>
-  <%= f.label :text %> <br>
+  <%= f.label :text, "Your Answer Here:" %> <br>
   <%= f.text_area :text %> <br>
-  <%= f.submit %>
+  <%= f.submit "Submit My Answer" %>
 <% end %>
