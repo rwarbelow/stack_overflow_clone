@@ -1,4 +1,7 @@
 <h3>Question: <%= @question.title %></h3>
+<p>Tags: <% @question.tags.each do |tag| %>
+    <%= tag.name %>
+    <% end %> </p>
 <p><%= @question.text %></p>
 Asked by: <%= @question.user.name %><br>
 <% if current_user && current_user.id == @question.user.id %>
