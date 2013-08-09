@@ -1,21 +1,21 @@
 <div class='vote'>
 <%= voteable.votes.sum(:direction) %>
 
-<%= form_for(@vote) do |v| %>
+<%= form_for(vote) do |v| %>
   <%= v.hidden_field(:voteable_type, value: voteable.class ) %>
   <%= v.hidden_field(:direction, value: 1) %>
   <%= v.hidden_field(:voteable_id, value: voteable.id) %>
   <%= v.submit 'Vote up' %>
 <% end %>
 
-<%= form_for(@vote) do |v| %>
+<%= form_for(vote) do |v| %>
   <%= v.hidden_field(:voteable_type, value: voteable.class) %>
   <%= v.hidden_field(:direction, value: 0) %>
   <%= v.hidden_field(:voteable_id, value: voteable.id) %>
   <%= v.submit 'Cancel Vote' %>
 <% end %>
 
-<%= form_for(@vote) do |v| %>
+<%= form_for(vote) do |v| %>
   <%= v.hidden_field(:voteable_type, value: voteable.class) %>
   <%= v.hidden_field(:direction, value: -1) %>
   <%= v.hidden_field(:voteable_id, value: voteable.id) %>
