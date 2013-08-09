@@ -59,4 +59,12 @@ ActiveRecord::Schema.define(:version => 20130809013856) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "votes", :force => true do |t|
+    t.integer  "count",         :default => 0
+    t.integer  "voteable_id"
+    t.string   "voteable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 end
