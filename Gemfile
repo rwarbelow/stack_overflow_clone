@@ -23,12 +23,17 @@ gem 'jquery-rails'
 
 group :development, :test do
 	gem 'rspec-rails'
+  gem 'guard-rspec'
 end
 
 group :test do
 	gem 'faker'
 	gem 'factory_girl_rails'
 	gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
 end
 
 
