@@ -11,6 +11,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include Capybara::DSL
+  config.include Features::SignInHelper, type: :feature
 
   config.mock_with :rspec
 
