@@ -1,7 +1,25 @@
 <h3>Question: <%= @question.title %></h3>
+
 <p>Tags: <% @question.tags.each do |tag| %>
     <%= tag.name %>
     <% end %> </p>
+
+<%= @question.votes.count %>
+
+<%= form_for(@vote) do |v| %>
+  <%= v.hidden_field(:voteable_type, value: 'Question') %>
+  <%= v.hidden_field(:count,         value: 1) %>
+  <%= v.hidden_field(:voteable_id,   value: @question.id) %>
+  <%= v.submit 'Vote up' %>
+<% end %>
+
+<%= form_for(@vote) do |v| %>
+  <%= v.hidden_field(:voteable_type, value: 'Question') %>
+  <%= v.hidden_field(:count,         value: -1) %>
+  <%= v.hidden_field(:voteable_id, value: @question.id) %>
+  <%= v.submit 'Vote down' %>
+<% end %>
+
 <p><%= @question.text %></p>
 Asked by: <%= @question.user.name %><br>
 <% if current_user && current_user.id == @question.user.id %>
@@ -20,8 +38,6 @@ Asked by: <%= @question.user.name %><br>
       <%= f.text_area :text, :cols => "60", :rows => "2" %><br>
       <%= f.submit %>
     <% end %><br>
-
-
 
 <% if @question.answers.empty? %>
   <h3>This question has not yet been answered.</h3>
