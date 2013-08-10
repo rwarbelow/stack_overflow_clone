@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130809155540) do
+ActiveRecord::Schema.define(:version => 20130809215821) do
 
   create_table "answers", :force => true do |t|
     t.string   "text"
@@ -41,8 +41,9 @@ ActiveRecord::Schema.define(:version => 20130809155540) do
     t.string   "title"
     t.string   "text"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "best_answer_id"
   end
 
   create_table "tags", :force => true do |t|
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130809155540) do
     t.string   "password_digest"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "about"
   end
 
   create_table "votes", :force => true do |t|

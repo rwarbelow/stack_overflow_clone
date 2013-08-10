@@ -1,13 +1,15 @@
 class Question < ActiveRecord::Base
   attr_accessible :text, :user_id, :title, :all_tags
+  
   belongs_to :user
+  belongs_to :best_answer, class_name: "Answer"
   has_many :answers
   has_many :question_tags
   has_many :tags, through: :question_tags
   has_many :comments, as: :commentable
   has_many :votes,    as: :voteable
 
-  validates_presence_of :text, :title
+  validates_presence_of :text, :title, :user_id
 
   def all_tags=(tag_names)
     tag_names = tag_names.split(',')
